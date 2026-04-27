@@ -2,13 +2,27 @@
 
 **LLM-first GPU Guide, VRAM Requirements, Benchmarks, and AI Workload Compatibility**
 
-A practical GPU reference for AI builders, with a strong focus on local LLM inference, VRAM requirements, model compatibility, and GPU selection for real-world AI workloads.
+A practical GPU reference for AI builders — with a strong focus on local LLM inference, VRAM requirements, model compatibility, and GPU selection for real-world AI workloads.
 
 > The first question for any local AI project: *Does it fit in VRAM?*
 
 [![GPU Platforms](https://img.shields.io/badge/GPU-CUDA%20%7C%20ROCm%20%7C%20Metal-blue?style=for-the-badge)](https://developer.nvidia.com/cuda-gpus)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
+[![Last Updated](https://img.shields.io/badge/Updated-2026--04-orange?style=for-the-badge)]()
+
+---
+
+## 🔥 Start Here — Choose Your Path
+
+| I'm building... | Go to... | Why |
+|-----------------|----------|-----|
+| **Local LLMs** | 👇 [awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm) | LLM-specific VRAM tables, model compatibility, tokens/sec benchmarks |
+| **Image Generation / SD** | See Section 7 | SDXL benchmarks, tool comparisons |
+| **Training / Fine-tuning** | See Section 7 | Training GPU recommendations |
+| **Not sure what I need** | See Section 1 | Quick decision guide |
+
+**This repo** covers general AI workloads + links to the specialized LLM repo.
 
 ---
 
@@ -20,6 +34,8 @@ A practical GPU reference for AI builders, with a strong focus on local LLM infe
 | 13B models | RTX 4070 Ti Super / RTX 4090 | Better VRAM headroom |
 | 34B models | RTX 4090 / RTX 3090 | 24GB VRAM class |
 | 70B+ models | Cloud GPU / multi-GPU | Local single-GPU gets expensive |
+
+> **For detailed LLM benchmarks and model compatibility → [awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm)**
 
 ---
 
@@ -54,7 +70,7 @@ Q4:    Parameters × 0.5 bytes
 | VRAM | 8–16GB |
 | Best for | 7B models, testing LLMs |
 | Price | $300–400 new |
-| Quantization | Q4 runs smoothly |
+| Can run | Llama 3.1 8B, Mistral 7B |
 
 ### Best Value — RTX 4070 Ti Super
 
@@ -81,35 +97,32 @@ Q4:    Parameters × 0.5 bytes
 | VRAM | 24GB |
 | Best for | 13B–34B models |
 | Price | $500–700 used |
-| Why | Still the best price/performance in used market |
+| Why | Best price/performance in used market |
 
-### High-End / No Compromise — RTX 5090
+### High-End — RTX 5090
 
 | Spec | Value |
 |------|-------|
 | VRAM | 32GB |
 | Best for | Any single-GPU workload |
 | Price | $2,000+ |
-| When | Maximum headroom needed |
 
 ---
 
 ## 4. Model Compatibility Matrix
 
-| Model | Min GPU | Recommended | Quantization Options |
-| --------- | ------- | --------------- | --------------------- |
-| **LLM: Llama 3.1 8B** | RTX 3060 | RTX 4060 | FP16, Q4, Q8 |
-| **LLM: Llama 3.1 70B** | RTX 4090 ×2 | Cloud | Q4, Q8 |
-| **LLM: Mistral 7B** | RTX 3060 | RTX 4060 | FP16, Q4 |
-| **LLM: Mixtral 8x7B** | RTX 4070 | RTX 4090 | Q4 (needs ~24GB) |
-| **LLM: Qwen 2.5 14B** | RTX 4070 | RTX 4090 | FP16, Q4 |
-| **LLM: Qwen 2.5 32B** | RTX 4090 | RTX 4090 | Q4 |
-| **LLM: DeepSeek 33B** | RTX 4090 | RTX 4090 | Q4 (fits in 24GB) |
-| **LLM: Phi-3 Medium** | RTX 4060 | RTX 4070 | Q4 |
-| **SD: SDXL 1024×1024** | RTX 4070 | RTX 4090 | 16GB minimum |
-| **SD: Flux Dev** | RTX 4090 | RTX 4090 24GB | Needs 20GB+ |
+| Model | Type | Min GPU | Recommended | Quantization |
+| --------- | ---- | ------- | --------------- | ------------- |
+| Llama 3.1 8B | LLM | RTX 3060 | RTX 4060 | FP16, Q4, Q8 |
+| Llama 3.1 70B | LLM | RTX 4090 ×2 | Cloud | Q4, Q8 |
+| Mistral 7B | LLM | RTX 3060 | RTX 4060 | FP16, Q4 |
+| Mixtral 8x7B | LLM | RTX 4070 | RTX 4090 | Q4 |
+| Qwen 2.5 14B | LLM | RTX 4070 | RTX 4090 | FP16, Q4 |
+| DeepSeek 33B | LLM | RTX 4090 | RTX 4090 | Q4 |
+| SDXL 1024×1024 | SD | RTX 4070 | RTX 4090 | 16GB min |
+| Flux Dev | SD | RTX 4090 | RTX 4090 24GB | Needs 20GB+ |
 
-> For full interactive compatibility: [bestgpuforllm.com/compare](https://bestgpuforllm.com/compare)
+> For full interactive LLM compatibility: **[awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm)** → Model Compatibility Matrix
 
 ---
 
@@ -117,17 +130,17 @@ Q4:    Parameters × 0.5 bytes
 
 ### Tokens/sec — LLM Inference (Q4_K_M, 2048 context)
 
+> *Full benchmark dataset available in [awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm)*
+
 | GPU | VRAM | 7B | 13B | 34B | 70B |
 |-----|------|---:|---:|---:|---:|
 | RTX 4060 | 8GB | 35 | 18 | ❌ | ❌ |
-| RTX 4060 Ti | 16GB | 40 | 24 | ❌ | ❌ |
 | RTX 4070 | 12GB | 45 | 22 | ❌ | ❌ |
-| RTX 4070 Ti Super | 16GB | 50 | 28 | ❌ | ❌ |
 | RTX 4090 | 24GB | 80 | 45 | 18 | ⚠️ |
 | RTX 3090 | 24GB | 70 | 40 | 15 | ⚠️ |
 | A100 | 80GB | 120 | 80 | 40 | 25 |
 
-> **Notes**: Q4_K_M quantization. Framework: llama.cpp. Values may vary by exact model and system config.
+> **Notes**: Q4_K_M quantization. Framework: llama.cpp. Values vary by model and system config.
 
 ### Image Generation — Stable Diffusion XL (1024×1024, DPM++ 2M Karras)
 
@@ -136,10 +149,9 @@ Q4:    Parameters × 0.5 bytes
 | RTX 4090 | 24GB | 3–4s | 15–17 img/min |
 | RTX 3090 | 24GB | 4–5s | 12–15 img/min |
 | RTX 4070 Ti Super | 16GB | 5–7s | 9–12 img/min |
-| RTX 4070 | 12GB | 6–8s | 7–10 img/min |
 | RTX 3060 | 12GB | 8–12s | 5–7 img/min |
 
-> For full benchmark methodology: [bestgpuforai.com/best-gpu-for-stable-diffusion](https://bestgpuforai.com/best-gpu-for-stable-diffusion)
+> **Detailed SD benchmarks**: [bestgpuforai.com/best-gpu-for-stable-diffusion](https://bestgpuforai.com/best-gpu-for-stable-diffusion)
 
 ---
 
@@ -159,7 +171,7 @@ Q4:    Parameters × 0.5 bytes
 - ✅ Want flexibility to switch GPU types
 - ✅ Experimenting with various model sizes
 
-**Break-even**: If you use GPU >20 hours/week, local is cheaper long-term.
+**Break-even**: Local cheaper if you use GPU >20 hours/week.
 
 | Provider | Strength | Ref |
 |----------|----------|-----|
@@ -180,18 +192,18 @@ Q4:    Parameters × 0.5 bytes
 | Fine-tune 13B (Q4) | RTX 4090 24GB | RTX 4090 ×2 |
 | Full training runs | A100/H100 | Multi-GPU setup |
 
-> [Training GPU guide](https://bestgpuforai.com/best-gpu-for-deep-learning)
+> **Guide**: [bestgpuforai.com/best-gpu-for-deep-learning](https://bestgpuforai.com/best-gpu-for-deep-learning)
 
 ### Image Generation
 
 | Tool | Best GPU | Notes |
 |------|----------|-------|
 | Automatic1111 | RTX 4070+ | Most popular, large ecosystem |
-| ComfyUI | RTX 4070+ | Node-based, extremely flexible |
+| ComfyUI | RTX 4070+ | Node-based, flexible |
 | Fooocus | RTX 4060+ | Simplified UI, quality focus |
 | SD WebUI Forge | RTX 3060+ | Memory-optimized |
 
-> [SD GPU recommendations](https://bestgpuforai.com/best-gpu-for-stable-diffusion)
+> **Guide**: [bestgpuforai.com/best-gpu-for-stable-diffusion](https://bestgpuforai.com/best-gpu-for-stable-diffusion)
 
 ### Embedded / Edge AI
 
@@ -215,20 +227,13 @@ Q4:    Parameters × 0.5 bytes
 | [LM Studio](https://lmstudio.ai) | GUI experience | ✅ | ❌ | ✅ |
 | [Open WebUI](https://openwebui.com) | Self-hosted ChatGPT | ✅ | ⚠️ | ✅ |
 
-### For Image Generation
-
-| Tool | Best For | Notes |
-|------|----------|-------|
-| Automatic1111 | Most popular | Huge extension ecosystem |
-| ComfyUI | Workflows | Node-based, very flexible |
-| Fooocus | Ease of use | Quality-focused, simple UI |
-| SD WebUI Forge | Memory efficiency | Optimized for low VRAM |
+> **Detailed framework comparison**: [awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm) → Framework Support
 
 ---
 
 ## Links to Detailed Guides
 
-### From bestgpuforllm.com (LLM-focused)
+### LLM Resources → [awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm)
 
 | Guide | What It Covers |
 | ----- | -------------- |
@@ -239,7 +244,7 @@ Q4:    Parameters × 0.5 bytes
 | [VRAM Calculator](https://bestgpuforllm.com/vram-calculator) | Estimate requirements |
 | [Tokens/sec Predictor](https://bestgpuforllm.com/tokens-per-second) | Speed estimation |
 
-### From bestgpuforai.com (General AI)
+### General AI Resources → [bestgpuforai.com](https://bestgpuforai.com)
 
 | Guide | What It Covers |
 | ----- | -------------- |
@@ -324,13 +329,11 @@ This repo focuses on:
 | Need 70B+ models | Cloud GPU |
 | Do heavy SD/training | RTX 4090 ×2 or A100 |
 
----
-
 **The best GPU is not the most expensive one. It's the one that fits your model in VRAM, matches your budget, and doesn't overbuy for your actual needs.**
 
 ---
 
-⭐️ **If this helped, consider starring the repo!**
+**⭐️ If this helped, consider starring the repo!**
 
 [![Star on GitHub](https://img.shields.io/github/stars/airdropkalami/awesome-gpu-for-ai?style=social)](https://github.com/airdropkalami/awesome-gpu-for-ai)
 [![Follow on X](https://img.shields.io/twitter/follow/thurmon_demich?style=social)](https://twitter.com/thurmon_demich)
