@@ -1,260 +1,236 @@
-# Awesome GPU for AI / LLM Inference
+# 🚀 Awesome GPU for AI
 
-<p align="center">
-  <img src="https://img.shields.io/badge/GPU-CUDA%20%7C%20ROCm%20%7C%20Metal-blue?style=for-the-badge" alt="GPU Platforms">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge" alt="PRs Welcome">
-</p>
+**VRAM, LLM Compatibility, and Real-World GPU Recommendations (2026)**
 
-A curated guide to choosing the right GPU for AI and LLM inference workloads. Covers VRAM requirements, token/sec benchmarks, and real-world recommendations.
+A practical, developer-focused guide to choosing the right GPU for AI workloads — including local LLMs, Stable Diffusion, training, and inference.
 
-**[bestgpuforllm.com](https://bestgpuforllm.com)** — LLM-specific GPU guides and benchmarks  
-**[bestgpuforai.com](https://bestgpuforai.com)** — General AI, image generation, and training GPU guides
+> If you are building with AI locally, your biggest constraint is not compute — it's VRAM.
 
----
-
-## Quick Start: How Much VRAM Do You Need?
-
-### For LLM Inference
-
-| Model Size | FP16 (full precision) | INT4 (quantized) | Recommended GPU |
-|-----------|----------------------|-------------------|-----------------|
-| 7B | 14 GB | 4-5 GB | RTX 3060 12GB |
-| 13B | 26 GB | 7-8 GB | RTX 3090 24GB |
-| 34B | 68 GB | 18-20 GB | RTX 4090 24GB + Q4 |
-| 70B | 140 GB | 35-40 GB | Dual RTX 3090 or A100 |
-
-For detailed LLM benchmarks, visit [bestgpuforllm.com](https://bestgpuforllm.com)
-
-### For Image Generation / Stable Diffusion
-
-| GPU | VRAM | SDXL Performance | Best For |
-|-----|------|------------------|----------|
-| RTX 4090 | 24GB | ~3-4 sec/img | Production, highest quality |
-| RTX 3090 | 24GB | ~4-5 sec/img | Excellent value |
-| RTX 4070 Ti Super | 16GB | ~5-7 sec/img | SDXL with room for variants |
-| RTX 3060 | 12GB | ~8-12 sec/img | Entry-level SDXL |
-
-Learn more at [bestgpuforai.com/best-gpu-for-stable-diffusion](https://bestgpuforai.com/best-gpu-for-stable-diffusion)
+[![GPU Platforms](https://img.shields.io/badge/GPU-CUDA%20%7C%20ROCm%20%7C%20Metal-blue?style=for-the-badge)](https://developer.nvidia.com/cuda-gpus)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
 
 ---
 
-## GPU Benchmarks
+# 🧠 TL;DR — Quick GPU Guide
 
-### LLM Token Generation Speed (tokens/sec)
-
-| GPU | 7B Q4_K_M | 13B Q4_K_M | 34B Q4_K_M |
-|-----|-----------|------------|------------|
-| RTX 4090 | 45-55 | 28-35 | 12-16 |
-| RTX 3090 | 38-48 | 24-30 | 10-14 |
-| RTX 3080 | 30-40 | 18-24 | - |
-| RTX 3060 | 22-28 | 12-16 | - |
-| RX 7900 XTX | 28-35 | 14-18 | - |
-
-*Testing conditions: Llama 2/3, context length 2048, separate prefill/decode.*
-
-For full benchmark methodology, see our [GPU comparison tool](https://bestgpuforllm.com/compare/).
-
-### Image Generation Speed (Stable Diffusion XL 1024×1024)
-
-| GPU | Seconds per Image | Throughput |
-|-----|------------------|------------|
-| RTX 4090 | 3-4s | 15-17 img/min |
-| RTX 3090 | 4-5s | 12-15 img/min |
-| RTX 4070 Ti Super | 5-7s | 9-12 img/min |
-| RTX 4070 | 6-8s | 7-10 img/min |
-| RTX 3060 | 8-12s | 5-7 img/min |
-
-Full benchmarks at [bestgpuforai.com/best-gpu-for-stable-diffusion](https://bestgpuforai.com/best-gpu-for-stable-diffusion)
+| Use Case | Recommended GPU |
+| -------------------- | --------------- |
+| Beginner / 7B models | RTX 4060 |
+| Most users / 13B–34B | RTX 4090 |
+| Budget 24GB | Used RTX 3090 |
+| Large models (70B+) | Cloud GPU |
 
 ---
 
-## GPU Recommendations by Use Case
+# 📊 VRAM Requirements (LLMs)
 
-### Local LLM Inference
+| Model Size | Min VRAM | Comfortable VRAM | Notes |
+| ---------- | -------- | ---------------- | ------------------------- |
+| 7B | 6GB | 8GB | Very easy to run locally |
+| 13B | 10GB | 16GB | Best balance |
+| 34B | 20GB | 24GB | High-end consumer GPUs |
+| 70B | 40GB+ | 48GB+ | Usually cloud / multi-GPU |
 
-**Best Overall**: RTX 3090 24GB
-- Best price/performance ratio in the used market ($500-700)
-- Handles 13B models at full FP16, 34B at Q4
-- Excellent availability
+> **Rule**: VRAM determines *what you can run* — compute determines *how fast it runs*
 
-**Budget Pick**: RTX 3060 12GB
-- Can run 7B models smoothly, 13B with quantization
-- New cards still widely available
-
-**Maximum Performance**: RTX 4090 24GB
-- Fastest consumer GPU for LLM inference
-- Best for developers who value speed over cost
-
-→ [Full LLM GPU recommendations](https://bestgpuforllm.com/best-gpu-for-ollama)
-
-### Image Generation / Stable Diffusion
-
-**Best Value**: RTX 4070 Ti Super
-- 16GB VRAM, excellent for SDXL and ComfyUI workflows
-- Good used market availability
-
-**Dream Setup**: RTX 4090
-- 24GB handles any SD configuration including Flux
-- Fastest image generation at 1024×1024
-
-→ [Full SD GPU recommendations](https://bestgpuforai.com/best-gpu-for-stable-diffusion)
-
-### AI Training / Fine-tuning
-
-**Single GPU Training**: RTX 4090 24GB
-- Supports full model fine-tuning up to 7B at FP16
-
-**Multi-GPU Setup**: RTX 3090 ×2 or ×4
-- NVLink not required for inference
-- For production training, consider A100 or H100
-
-→ [Training GPU guides](https://bestgpuforai.com/best-gpu-for-deep-learning)
+**Why this table matters**: Most GPU guides list prices and benchmarks. This table tells you the minimum you actually need — so you don't overbuy or underbuy.
 
 ---
 
-## VRAM Calculator
+# 🧩 GPU Recommendations
 
-Use our calculator to estimate how much VRAM you need for your model:
+## 🔹 Budget Tier
 
-**Formula**: `VRAM = (Parameters × Bytes per Weight) + KV Cache + Overhead`
+| GPU | VRAM | Best For |
+|-----|------|----------|
+| RTX 4060 | 8GB | 7B models, light SD |
+| RTX 4060 Ti | 16GB | 7B–13B models |
 
-### Weight Precision
+*Good for*: 7B–13B models, light Stable Diffusion
+*Limitation*: VRAM ceiling for larger models
 
-| Precision | Bytes per Parameter | 7B Requirements | 13B Requirements |
-|-----------|--------------------|-----------------|-------------------|
-| FP16 | 2 bytes | 14 GB | 26 GB |
-| INT8 | 1 byte | 7 GB | 13 GB |
-| INT4 | 0.5 bytes | 3.5 GB | 6.5 GB |
-| Q4_K_M | ~0.5 bytes | 4-5 GB | 7-8 GB |
+## 🔹 Best Value Tier
 
-### KV Cache Calculation
+| GPU | VRAM | Best For |
+|-----|------|----------|
+| RTX 4090 | 24GB | 13B–34B models, SDXL, training |
+| RTX 4070 Ti Super | 16GB | SDXL, mid-size models |
 
+*Best overall*: RTX 4090 — handles any consumer AI workload
+*Price*: $1,500–1,800 new, $1,000–1,400 used
+
+## 🔹 Used Value Pick
+
+| GPU | VRAM | Best For |
+|-----|------|----------|
+| RTX 3090 | 24GB | 13B–34B models, excellent value |
+
+*Why*: Still one of the best price/performance GPUs for LLM inference
+*Price*: $500–700 used — hard to beat for 24GB
+
+## 🔹 High-End / No Compromise
+
+| GPU | VRAM | Best For |
+|-----|------|----------|
+| RTX 5090 | 32GB | Any model, maximum performance |
+| A100/H100 | 40–80GB | Production, 70B+ models |
+
+*Only if*: Budget is not a concern and you need maximum headroom
+
+---
+
+# 🤖 Model Compatibility (Quick Reference)
+
+| Model | Min GPU | Recommended | Notes |
+| --------- | ------- | --------------- | ------- |
+| Llama 3.1 8B | RTX 3060 | RTX 4060 | Smooth at Q4 |
+| Llama 3.1 70B | RTX 4090 ×2 | Cloud recommended | Needs ~48GB |
+| Mistral 7B | RTX 3060 | RTX 4060 | Very efficient |
+| Mixtral 8x7B | RTX 4070 | RTX 4090 | Epic mode needs ~24GB |
+| Qwen 2.5 14B | RTX 4070 | RTX 4090 | Good balance |
+| DeepSeek 33B | RTX 4090 | RTX 4090 | Q4 fits in 24GB |
+
+> For full model compatibility, see: [bestgpuforllm.com/compare](https://bestgpuforllm.com/compare)
+
+---
+
+# ⚖️ Local vs Cloud: When to Use Each
+
+## Use Local GPU When:
+
+- You run inference daily (20+ hours/week)
+- Privacy matters (your data stays on your machine)
+- You want consistent performance without hourly costs
+- You're actively developing / iterating
+
+## Use Cloud GPU When:
+
+- You need 70B+ models
+- You only run inference occasionally
+- You want to experiment without hardware cost
+- Batch processing with variable demand
+
+**Break-even**: If you use GPU >20 hours/week, local is cheaper long-term.
+
+### Cloud Platforms We Recommend
+
+| Platform | Strength | Ref Link |
+|----------|----------|----------|
+| [RunPod](https://app.runpod.io?r=7a4cz5kl) | Best for LLMs | Use ref `7a4cz5kl` |
+| [Vast.ai](https://vast.ai) | Competitive pricing | Ask for deals |
+
+> Full cost comparison: [TCO Calculator](https://bestgpuforllm.com/tco-calculator)
+
+---
+
+# ⚠️ Common Mistakes (And How to Avoid Them)
+
+## ❌ Mistake 1: Buying for Benchmarks
+
+Benchmarks ≠ your real workload.
+
+- Synthetic tests run in ideal conditions
+- Your actual use case has different memory patterns
+- Focus on VRAM compatibility first, speed second
+
+## ❌ Mistake 2: Ignoring VRAM Requirements
+
+You cannot optimize around insufficient VRAM.
+
+- A RTX 4090 with 24GB cannot run a 70B model
+- Quantization helps but has quality tradeoffs
+- Start with the model you want, then find the GPU that fits
+
+## ❌ Mistake 3: Overbuying for Your Model Size
+
+A $1,600 GPU for a 7B model is overkill.
+
+- 7B models run fine on RTX 4060
+- You don't need 24GB if you're only running 7B models
+- Save money for electricity or more VRAM later
+
+## ❌ Mistake 4: Forcing Everything Local
+
+Cloud exists for a reason.
+
+- 70B models are expensive to run locally
+- If you only need occasional access, cloud is smarter
+- Use local for daily drivers, cloud for experiments
+
+---
+
+# 🛠️ Framework Quick Reference
+
+## For LLMs
+
+| Framework | NVIDIA | AMD ROCm | Apple MLX | Best For |
+|-----------|--------|----------|-----------|----------|
+| [Ollama](https://ollama.com) | ✅ | ⚠️ | ✅ | Easiest setup |
+| [llama.cpp](https://github.com/ggerganov/llama.cpp) | ✅ | ✅ | ❌ | Quantized models |
+| [vLLM](https://docs.vllm.ai) | ✅ | ❌ | ❌ | High-throughput batching |
+| [LM Studio](https://lmstudio.ai) | ✅ | ❌ | ✅ | Best GUI experience |
+
+## For Image Generation
+
+| Tool | NVIDIA | AMD ROCm | Best For |
+|------|--------|----------|----------|
+| [Automatic1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui) | ✅ | ⚠️ | Most popular |
+| [ComfyUI](https://github.com/comfyanonymous/ComfyUI) | ✅ | ⚠️ | Node-based workflows |
+| [Fooocus](https://github.com/lllyasviel/Fooocus) | ✅ | ❌ | Quality focus, easy use |
+
+> For detailed framework benchmarks, visit [bestgpuforai.com](https://bestgpuforai.com)
+
+---
+
+# 📚 Detailed Guides (Back to Your Sites)
+
+## From bestgpuforllm.com
+
+- [Best GPU for Ollama](https://bestgpuforllm.com/best-gpu-for-ollama) — Getting started with Ollama
+- [How Much VRAM for LLM?](https://bestgpuforllm.com/how-much-vram-for-local-llm) — Detailed VRAM breakdown
+- [RunPod vs Vast.ai](https://bestgpuforllm.com/runpod-vs-vast-ai) — Cloud comparison
+
+## From bestgpuforai.com
+
+- [Best GPU for AI](https://bestgpuforai.com/best-gpu-for-ai) — General AI GPU guide
+- [Best GPU for Stable Diffusion](https://bestgpuforai.com/best-gpu-for-stable-diffusion) — SDXL focused
+- [Best GPU for Deep Learning](https://bestgpuforai.com/best-gpu-for-deep-learning) — Training recommendations
+
+---
+
+# 🧮 VRAM Calculator (Quick Version)
+
+For a 7B model at FP16:
 ```
-KV Cache (GB) = 2 × Layers × HiddenSize × SequenceLength × BytesPerValue ÷ 1024³
+Weights: 7B × 2 bytes = 14 GB
+KV Cache (2048 ctx): ~1 GB
+Overhead: ~2 GB
+Total: ~17 GB → Need 24GB GPU
 ```
 
-For Llama-family models (32 layers, hidden_size 4096):
-- 2048 context: ~1 GB
-- 4096 context: ~2 GB
-- 8192 context: ~4 GB
+For a 13B model at Q4_K_M:
+```
+Weights: 13B × 0.5 bytes = 6.5 GB
+KV Cache (2048 ctx): ~2 GB
+Overhead: ~2 GB
+Total: ~10.5 GB → RTX 4070 or better
+```
 
-### Runtime Overhead
-
-| Framework | Overhead |
-|-----------|----------|
-| llama.cpp | 1-2 GB |
-| Ollama | 2-3 GB |
-| vLLM | 2-4 GB |
-| transformers + HF | 3-5 GB |
-
-Try our interactive calculator: [bestgpuforllm.com/vram-calculator](https://bestgpuforllm.com/vram-calculator)
+> Full interactive calculator: [VRAM Calculator](https://bestgpuforllm.com/vram-calculator)
 
 ---
 
-## Choosing Between Cloud vs Local
+# 🤝 Contributing
 
-| Factor | Local GPU | Cloud (RunPod/Vast.ai) |
-|--------|-----------|----------------------|
-| Cost (long term) | One-time purchase | Hourly usage |
-| Privacy | Full control | Data leaves machine |
-| Availability | Always on | Pay for what you use |
-| Performance | Know your hardware | Variable by instance |
-| Best for | Daily users, developers | Experiments, batch jobs |
+Contributions welcome! Please submit PRs for:
 
-### Break-even Analysis
-
-- Regular use (>20 hours/week): Local is cheaper long-term
-- Occasional use (<10 hours/week): Cloud is more cost-effective
-- Privacy-sensitive workloads: Always local
-
-For a full cost comparison, see our [TCO calculator](https://bestgpuforllm.com/tco-calculator).
-
----
-
-## Framework Compatibility
-
-### LLM Frameworks
-
-| Framework | NVIDIA | AMD ROCm | Apple MLX | Notes |
-|-----------|--------|----------|-----------|-------|
-| llama.cpp | ✅ | ✅ | ❌ | Best for quantized models |
-| Ollama | ✅ | ⚠️ | ✅ | Easiest setup, good defaults |
-| vLLM | ✅ | ❌ | ❌ | Fastest for batching |
-| text-generation-webui | ✅ | ✅ | ❌ | Most flexible |
-| LM Studio | ✅ | ❌ | ✅ | Great GUI, good presets |
-
-### Image Generation
-
-| Tool | NVIDIA | AMD ROCm | Notes |
-|------|--------|----------|-------|
-| Automatic1111 | ✅ | ⚠️ | Most popular, extensive ecosystem |
-| ComfyUI | ✅ | ⚠️ | Node-based, extremely flexible |
-| SD WebUI Forge | ✅ | ❌ | Memory-optimized |
-| Fooocus | ✅ | ❌ | Simplified, quality-focused |
-
-→ [Full framework guides](https://bestgpuforai.com)
-
----
-
-## GPU Architecture Comparison
-
-### NVIDIA CUDA (Recommended)
-
-- Best LLM framework support (vLLM, Ollama, llama.cpp)
-- Excellent driver ecosystem and CUDA optimization
-- Broad model compatibility across all frameworks
-- Best tensor core performance for AI workloads
-
-### AMD ROCm (Improving)
-
-- Better raw price/performance per dollar
-- Linux-only for most features
-- ROCm support improving but still behind CUDA for AI
-- No vLLM support yet (critical for high-throughput)
-
-### Apple Silicon (MLX)
-
-- Excellent for local inference on Mac
-- Very efficient unified memory bandwidth
-- Limited to Llama/Mistral with MLX optimization
-- No Windows/Linux equivalent yet
-
-→ [Full architecture analysis](https://bestgpuforai.com/nvidia-vs-amd-for-ai)
-
----
-
-## Latest GPU Recommendations
-
-### Best GPUs for AI (2026)
-
-1. **RTX 4090** — Best overall performance, 24GB VRAM
-2. **RTX 3090** — Best value for 24GB, used market excellent
-3. **RTX 4070 Ti Super** — Best 16GB option for SDXL
-4. **RTX 3060 12GB** — Best budget entry point
-
-→ [Full buying guide](https://bestgpuforai.com/best-gpu-for-ai)
-
-### Budget Builds (Under $500)
-
-1. **RTX 3060 12GB** — Best all-around budget AI GPU
-2. **RTX 2060 12GB** — Good secondary option
-3. **RX 6600 XT** — AMD alternative, Linux ROCm only
-
-→ [Budget guides](https://bestgpuforai.com/best-budget-gpu-for-ai)
-
----
-
-## Contributing
-
-Contributions welcome! Please read the contribution guidelines and submit PRs for:
-
-- New benchmark results (please include testing conditions)
-- Additional GPU recommendations
-- Corrections or updates to existing data
+- New benchmark results (include testing conditions)
+- GPU releases and pricing updates
+- Model compatibility improvements
 - Framework compatibility updates
 
-When adding benchmark data, please include:
+**When adding benchmark data, please include**:
 - GPU model and VRAM
 - Model and quantization level
 - Framework and version
@@ -263,26 +239,37 @@ When adding benchmark data, please include:
 
 ---
 
-## Resources
+# ⭐️ Why This Repo Exists
 
-### LLM Tools
-- [GPU Comparison Tool](https://bestgpuforllm.com/compare/) — Interactive GPU comparison table
-- [VRAM Calculator](https://bestgpuforllm.com/vram-calculator/) — Estimate VRAM requirements
-- [TCO Calculator](https://bestgpuforllm.com/tco-calculator/) — Compare cloud vs local costs
-- [Tokens/sec Predictor](https://bestgpuforllm.com/tokens-per-second/) — Estimate inference speed
+Most GPU guides have these problems:
 
-### Image Generation
-- [Best GPU for Stable Diffusion](https://bestgpuforai.com/best-gpu-for-stable-diffusion)
-- [Automatic1111 vs ComfyUI](https://bestgpuforai.com/automatic1111-vs-comfyui)
-- [Flux GPU Requirements](https://bestgpuforai.com/best-gpu-for-flux)
+- ❌ Too generic — not aligned with real workloads
+- ❌ Optimized for affiliate clicks — not developer needs
+- ❌ Outdated prices — no longer relevant
 
-### General AI
-- [Best GPU for AI](https://bestgpuforai.com/best-gpu-for-ai)
-- [Deep Learning GPU Guide](https://bestgpuforai.com/best-gpu-for-deep-learning)
-- [Fine-tuning GPU Recommendations](https://bestgpuforai.com/best-gpu-for-fine-tuning)
+This repo focuses on:
+
+- ✅ Real usage patterns
+- ✅ Actual constraints (VRAM first)
+- ✅ Practical decisions (not marketing fluff)
 
 ---
 
-## License
+# 📌 Final Note
 
-MIT License - feel free to use, share, and contribute.
+The best GPU is not the most expensive one.
+
+It's the one that:
+
+- ✅ Matches your model size
+- ✅ Fits your budget
+- ✅ And avoids unnecessary cost
+
+If you get those 3 right, you're already ahead of most people building local AI setups.
+
+---
+
+**⭐️ If this helped you, consider starring the repo!**
+
+[![Star on GitHub](https://img.shields.io/github/stars/airdropkalami/awesome-gpu-for-ai?style=social)](https://github.com/airdropkalami/awesome-gpu-for-ai)
+[![Follow on X](https://img.shields.io/twitter/follow/thurmon_demich?style=social)](https://twitter.com/thurmon_demich)
