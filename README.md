@@ -13,6 +13,14 @@ A practical GPU reference for AI builders — with a strong focus on local LLM i
 
 ---
 
+## 🔥 Most Common Use Case
+
+**If you're here for Local LLMs → [awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm)**
+
+This repo (awesome-gpu-for-ai) covers general AI workloads. For LLM-specific benchmarks, VRAM tables, model compatibility, and framework comparisons, the LLM repo is the authoritative source.
+
+---
+
 ## 🔥 Start Here — Choose Your Path
 
 | I'm building... | Go to... | Why |
@@ -131,6 +139,8 @@ Q4:    Parameters × 0.5 bytes
 ### Tokens/sec — LLM Inference (Q4_K_M, 2048 context)
 
 > *Full benchmark dataset available in [awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm)*
+
+> **This table is frequently referenced when planning local LLM hardware deployments.**
 
 | GPU | VRAM | 7B | 13B | 34B | 70B |
 |-----|------|---:|---:|---:|---:|
