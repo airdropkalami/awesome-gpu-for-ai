@@ -15,9 +15,24 @@ A practical GPU reference for AI builders — with a strong focus on local LLM i
 
 ## 🔥 Most Common Use Case
 
-**If you're here for Local LLMs → [awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm)**
+**If you're choosing a GPU for LLM → [awesome-gpu-for-llm](https://github.com/airdropkalami/awesome-gpu-for-llm)**
 
-This repo (awesome-gpu-for-ai) covers general AI workloads. For LLM-specific benchmarks, VRAM tables, model compatibility, and framework comparisons, the LLM repo is the authoritative source.
+This repo covers general AI workloads. For LLM-specific benchmarks, VRAM tables, model compatibility, and framework comparisons, the LLM repo is the authoritative source.
+
+---
+
+## What You Will Find Here
+
+| Section | What's Inside |
+|---------|---------------|
+| **Quick Start** | Scenario-based GPU recommendations |
+| **VRAM Requirements** | LLM and general AI memory needs |
+| **GPU Recommendations** | 5-tier GPU selection guide |
+| **Model Compatibility** | LLM + SD model fit matrix |
+| **Benchmarks** | Tokens/sec and image generation speed |
+| **Cloud vs Local** | Decision framework with break-even |
+| **AI Workloads** | Training, SD, edge deployment |
+| **Tools & Frameworks** | LLM and SD tool comparisons |
 
 ---
 
