@@ -9,7 +9,15 @@ A practical GPU reference for AI builders — with a strong focus on local LLM i
 [![GPU Platforms](https://img.shields.io/badge/GPU-CUDA%20%7C%20ROCm%20%7C%20Metal-blue?style=for-the-badge)](https://developer.nvidia.com/cuda-gpus)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
-[![Last Updated](https://img.shields.io/badge/Updated-2026--04-orange?style=for-the-badge)]()
+[![Last Updated](https://img.shields.io/badge/Updated-2026--05-orange?style=for-the-badge)]()
+
+---
+
+## 🆕 What's Hot in 2026
+
+- **Llama 4 Scout & Maverick** (April 2026) — first locally-runnable trillion-class MoE; Scout fits on RTX 5090, Maverick is multi-GPU only. See [Llama 4 hardware guide](https://bestgpuforllm.com/articles/best-gpu-for-llama-4/).
+- **Gemma 4 family** (E2B / E4B / 26B-A4B MoE / 31B Dense) — sweet spot for 16–24GB consumer cards. See [Gemma 4 VRAM](https://bestgpuforllm.com/articles/how-much-vram-for-gemma-4/).
+- **ComfyUI's $500M valuation + OpenAI Sora sunset** (April 2026) — fresh wave of self-hosted video creators choosing local GPUs over closed APIs. See [Best GPU for ComfyUI](https://bestgpuforai.com/articles/best-gpu-for-comfyui/).
 
 ---
 
